@@ -1,10 +1,20 @@
 import { pool } from "./services/pool";
 
-const mainActionButton = document.querySelector('.navbar8-action12 thq-button-filled thq-button-animated');
-const secondaryActionButton = document.querySelector('.navbar8-action12 thq-button-filled thq-button-animated');
+const clickMe = document.querySelector('.intro .test-connection');
 
-mainActionButton.onclick = function connectToBackend() {
-    secondaryActionButton.style.visibility = 'hidden';
+clickMe.onclick = function testConnection() {
+    pool.query(`insert into supplier
+        ( suppId, suppName, supplierAddress ) VALUES
+          (4,'giant eagle','america'), 
+          (5,'chewy','puppy land'), 
+          (6,'taj mahal','india'); `, (err, result) => 
+          {
+  if (err) { 
+      console.error('Error executing query:', err); 
+  } 
+  else { 
+      console.log('Query result:', result.rows); 
+  } 
+});
 }
-
 
